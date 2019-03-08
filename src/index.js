@@ -1,4 +1,4 @@
-const mainDiv = document.querySelector("div")
+const mainDiv = document.querySelector("#content")
 
 function getAll(){
   return fetch("http://localhost:3000/tests")
