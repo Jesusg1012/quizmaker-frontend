@@ -1,5 +1,6 @@
-const mainDiv = document.querySelector("#content")
-
+let showTestContainer = document.querySelector(".show-test")
+let oneTestContainer = document.querySelector('.show-one-test')
+let allTestsContainer = document.querySelector(".list-test")
 function getAll(){
   return fetch("http://localhost:3000/tests").then(res => res.json())
 }
@@ -22,7 +23,6 @@ function renderSingleTest(testObj) {
   testTitleP.addEventListener('click', handleTitleClick)
   // const testDescText = document.createElement('text')
   // testDescText.innerText = testObj.description
-
   allTestsContainer.append(testTitleUl, testTitleP)
 }
 
@@ -47,7 +47,7 @@ function testInfo(data) {
   button.dataset.id = data.id
   button.addEventListener('click', handleClickSubmit)
 
-  ul.append(titleH5, descText, questionsOl, button)
+  ul.append(titleH5, descText, questionsOl)
 
   return ul
 }
@@ -56,13 +56,15 @@ function eachquestionsLi(data) {
   const questionLi = document.createElement('li')
   const questionP = document.createElement('p')
   questionP.innerText = data.title
+  let answer = document.createElement('p')
+  answer.innerText = data.answer
 
 
   const input = document.createElement('input')
   input.type = 'text'
   input.dataset.questionId = data.id
 
-  questionLi.append(questionP, input)
+  questionLi.append(questionP, answer)
 
   return questionLi
 }
@@ -94,9 +96,6 @@ function handleClickSubmit(e) {
 }
 
 
-const allTestsContainer = document.querySelector(".list-test")
-const showTestContainer = document.querySelector(".show-test")
-const oneTestContainer = document.querySelector('.show-one-test')
 
 
 getAll().then(tests => {

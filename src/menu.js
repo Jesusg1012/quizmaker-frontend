@@ -46,13 +46,35 @@ function changeColor(e){
     menuWrapper.style.backgroundColor = "rgb(30, 30, 250)"
   }
   if(e.target.innerText === "Make a quiz"){
-    div.style.backgroundColor = "rgba(80, 100, 80, .7)"
-    menuWrapper.style.backgroundColor = "rgb(80, 100, 80)"
+    div.style.backgroundColor = "rgba(10, 130, 130, .7)"
+    menuWrapper.style.backgroundColor = "rgb(10, 130, 150)"
   }
 }
 
 function changeContent(e){
+
   if(e.target.innerText === "Make a quiz"){
     makequiz()
+  }
+  if(e.target.innerText == "Home"){
+    document.querySelector('#allquestions').innerHTML = ""
+    num = 0
+    body.innerHTML = `<div class="list-test">
+    </div>
+
+    <div class="show-test">
+    </div>
+
+    <div class='test-result'>
+    </div>
+  </div>`
+  allTestsContainer = document.querySelector(".list-test")
+  showTestContainer = document.querySelector(".show-test")
+  oneTestContainer = document.querySelector('.show-one-test')
+    getAll().then(tests => {
+      tests.forEach(test => {
+        renderSingleTest(test)
+      })
+    })
   }
 }
